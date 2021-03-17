@@ -5,7 +5,7 @@
         "smlnordic",
         "kupongsupport-api"
     ],
-    "homepage": "https://github.com/smlnordic/kupongsupport-api",
+    "homepage": "https://github.com/smlnordic/laravel-kupongsupport-api",
     "license": "MIT",
     "authors": [
         {
