@@ -1,0 +1,59 @@
+{
+    "name": "smlnordic/kupongsupport-api",
+    "description": "Integration with Kupongsupport API",
+    "keywords": [
+        "smlnordic",
+        "kupongsupport-api"
+    ],
+    "homepage": "https://github.com/smlnordic/kupongsupport-api",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "SocialMediaLab",
+            "email": "dev@socialmedialab.se",
+            "role": "Developer"
+        }
+    ],
+    "require": {
+        "php": "^7.4",
+        "spatie/laravel-package-tools": "^1.4.3",
+        "illuminate/contracts": "^8.0"
+    },
+    "require-dev": {
+        "orchestra/testbench": "^6.13",
+        "phpunit/phpunit": "^9.3",
+        "spatie/laravel-ray": "^1.9",
+        "vimeo/psalm": "^4.4"
+    },
+    "autoload": {
+        "psr-4": {
+            "SMLNordic\\KSApi\\": "src",
+            "SMLNordic\\KSApi\\Database\\Factories\\": "database/factories"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "SMLNordic\\KSApi\\Tests\\": "tests"
+        }
+    },
+    "scripts": {
+        "psalm": "vendor/bin/psalm",
+        "test": "vendor/bin/phpunit --colors=always",
+        "test-coverage": "vendor/bin/phpunit --coverage-html coverage"
+    },
+    "config": {
+        "sort-packages": true
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "SMLNordic\\KSApi\\KSApiServiceProvider"
+            ],
+            "aliases": {
+                "KSApi": "SMLNordic\\KSApi\\KSApiFacade"
+            }
+        }
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
+}
