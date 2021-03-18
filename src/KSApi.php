@@ -4,7 +4,6 @@ namespace SMLNordic\KSApi;
 
 use Exception;
 use GuzzleHttp\Client;
-use SMLNordic\KSApi\KSApiHelperFunctions;
 
 class KSApi
 {
