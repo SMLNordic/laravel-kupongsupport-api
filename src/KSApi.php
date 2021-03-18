@@ -90,6 +90,13 @@ class KSApi
     {
         try {
             $response = $this->client->get('/api/coupons/'.$id);
+
+            if ($response->getStatusCode() == 200) {
+                return $response->getBody();
+            } else {
+                throw new Exception('API Request failed', 901);
+            }
+            
         } catch (RequestException $e) {
             throw new Exception('API request failed', 903);
         }
