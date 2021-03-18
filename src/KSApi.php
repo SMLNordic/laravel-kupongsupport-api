@@ -67,7 +67,7 @@ class KSApi
         $params = array_merge($defaultOptions, $options);
 
         // Check/Validate/Fill params with missing values
-        $params = $this->helper->validateInput($params);
+        $params = $this->helper->validateCouponParams($params);
 
 
         try {
