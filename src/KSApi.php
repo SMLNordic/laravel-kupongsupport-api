@@ -54,14 +54,6 @@ class KSApi
             'delivery_type'    => null,
             'amount'           => 0,
             'valid_days'       => 90,
-            'ticket_reference' => null,
-            'phone_number'     => null,
-            'email'            => null,
-            'first_name'       => null,
-            'last_name'        => null,
-            'custom_message'   => null,
-            'custom_sms'       => null,
-            'custom_text'      => null,
         ];
 
         $params = array_merge($defaultOptions, $options);
