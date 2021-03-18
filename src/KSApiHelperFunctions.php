@@ -10,6 +10,45 @@ class KSApiHelperFunctions
 {
 
     /**
+     * @param  Response  $response
+     * @return mixed
+     * @throws Exception
+     */
+    public static function handleApiResponse(Response $response)
+    {
+        if ($response->getStatusCode() == 200 && $response->getBody()) {
+            return json_decode($response->getBody());
+        } else {
+            throw new Exception('Could not parse response', 901);
+        }
+    }
+
+    public static function validateCouponParams(array $params)
+    {
+
+        if ( ! $params['template']) {
+            if ($params['type'] == 'mobile') {
+                $params['template'] = config('kupongsupport-api.templates.mobile');
+            } elseif ($params['type'] == 'print') {
+                $params['template'] = config('kupongsupport-api.templates.print');
+            }
+        }
+
+        $validator = Validator::make($params, [
+            'type'         => 'required|in:print,mobile',
+            'email'        => 'nullable|required_without:phone_number|email',
+            'phone_number' => 'nullable|required_without:email|string|min:10|max:12'
+        ]);
+
+        if ($validator->fails()) {
+            dd($validator);
+        } else {
+            return $params;
+        }
+        
+    }
+
+    /**
      *
      * @param  type  $number
      * @return type
@@ -41,51 +80,5 @@ class KSApiHelperFunctions
     private static function stringStartsWith($haystack, $needle)
     {
         return ! strncmp($haystack, $needle, strlen($needle));
-    }
-
-    /**
-     * @param  Response  $response
-     * @return mixed
-     * @throws Exception
-     */
-    public static function handleApiResponse(Response $response)
-    {
-        if ($response->getStatusCode() == 200 && $response->getBody()) {
-            return json_decode($response->getBody());
-        } else {
-            throw new Exception('Could not parse response', 901);
-        }
-    }
-
-
-    public static function validateCouponParams(array $params)
-    {
-
-        $validator = Validator::make($params, [
-            'type' => 'required|in:print,mobile',
-            'email' => 'required_without:phone_number|email',
-            'phone_number' => 'required_without:email|string|min:10|max:12'
-        ]);
-
-        if ($validator->fails()) {
-            dd($validator);
-        }
-        dd('Validation OK!', $validator);
-
-        // Type is required
-        if ( ! $params['type']) {
-
-        }
-
-        if ( ! $params['email'] || ! $params['phone_number']) {
-            throw new Exception('Parameter "email" or "phone_number" is required');
-        } elseif ( ! $params['email']) {
-            // validate email
-
-        }
-
-        if ( ! $params['delivery_type']) {
-
-        }
     }
 }
