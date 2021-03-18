@@ -2,6 +2,9 @@
 
 namespace SMLNordic\KSApi;
 
+use Exception;
+use GuzzleHttp\Psr7\Response;
+
 class KSApiHelperFunctions
 {
 
@@ -37,5 +40,18 @@ class KSApiHelperFunctions
     private static function stringStartsWith($haystack, $needle)
     {
         return !strncmp($haystack, $needle, strlen($needle));
+    }
+
+    /**
+     * @param  Response  $response
+     * @return mixed
+     * @throws Exception
+     */
+    public static function handleApiResponse(Response $response) {
+        if ($response->getStatusCode() == 200 && $response->getBody()) {
+            return json_decode($response->getBody());
+        } else {
+            throw new Exception('Could not parse response', 901);
+        }
     }
 }

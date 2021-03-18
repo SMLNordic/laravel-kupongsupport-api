@@ -69,11 +69,8 @@ class KSApi
                 'json' => $params
             ]);
 
-            if ($response->getStatusCode() == 200) {
-                return $response->getBody();
-            } else {
-                throw new Exception('API Request failed', 901);
-            }
+            return KSApiHelperFunctions::handleApiResponse($response);
+
 
         } catch (RequestException $e) {
             throw new Exception('API request failed', 902);
@@ -91,12 +88,8 @@ class KSApi
         try {
             $response = $this->client->get('/api/coupons/'.$id);
 
-            if ($response->getStatusCode() == 200) {
-                return $response->getBody();
-            } else {
-                throw new Exception('API Request failed', 901);
-            }
-            
+            return KSApiHelperFunctions::handleApiResponse($response);
+
         } catch (RequestException $e) {
             throw new Exception('API request failed', 903);
         }
@@ -112,11 +105,8 @@ class KSApi
                 ]
             ]);
 
-            if ($response->getStatusCode() == 200) {
-                return $response->getBody();
-            } else {
-                throw new Exception('API Request failed', 904);
-            }
+            return KSApiHelperFunctions::handleApiResponse($response);
+
 
         } catch (RequestException $e) {
             throw new Exception('API request failed', 905);
