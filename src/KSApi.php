@@ -4,12 +4,14 @@ namespace SMLNordic\KSApi;
 
 use Exception;
 use GuzzleHttp\Client;
+use SMLNordic\KSApi\KSApiHelperFunctions;
 
 class KSApi
 {
 
     private $token;
     private $client;
+    private $helper;
 
     public function __construct()
     {
@@ -20,6 +22,7 @@ class KSApi
         }
 
         $this->setupClient();
+        $this->helper = new KSApiHelperFunctions();
     }
 
     /**
@@ -64,12 +67,16 @@ class KSApi
 
         $params = array_merge($defaultOptions, $options);
 
+        // Check/Validate/Fill params with missing values
+        $params = $this->helper->validateInput($params);
+
+
         try {
             $response = $this->client->post('/api/coupons/', [
                 'json' => $params
             ]);
 
-            return KSApiHelperFunctions::handleApiResponse($response);
+            return $this->helper->handleApiResponse($response);
 
 
         } catch (RequestException $e) {
@@ -88,7 +95,7 @@ class KSApi
         try {
             $response = $this->client->get('/api/coupons/'.$id);
 
-            return KSApiHelperFunctions::handleApiResponse($response);
+            return $this->helper->handleApiResponse($response);
 
         } catch (RequestException $e) {
             throw new Exception('API request failed', 903);
@@ -105,7 +112,7 @@ class KSApi
                 ]
             ]);
 
-            return KSApiHelperFunctions::handleApiResponse($response);
+            return $this->helper->handleApiResponse($response);
 
 
         } catch (RequestException $e) {
