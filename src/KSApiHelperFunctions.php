@@ -34,18 +34,33 @@ class KSApiHelperFunctions
             }
         }
 
+        if ( ! $params['delivery_type']) {
+
+            if (isset($params['phone_number']) && ! empty($params['phone_number'])) {
+                $params['delivery_type'] == 'sms';
+            } elseif (isset($params['email']) && ! empty($params['email'])) {
+                $params['delivery_type'] = 'email';
+            } else {
+                $params['delivery_type'] = 'api';
+            }
+        }
+
         $validator = Validator::make($params, [
-            'type'         => 'required|in:print,mobile',
-            'email'        => 'nullable|required_without:phone_number|email',
-            'phone_number' => 'nullable|required_without:email|string|min:10|max:12'
+            'template'      => 'required|numeric',
+            'type'          => 'required|in:print,mobile',
+            'email'         => 'nullable|required_without:phone_number|email',
+            'phone_number'  => 'nullable|required_without:email|string|min:10|max:12',
+            'delivery_type' => 'required|in:sms,email,api',
+            'valid_days'    => 'numeric|min:1',
+            'amount'        => 'numeric'
         ]);
 
         if ($validator->fails()) {
-            dd($validator);
+            throw new Exception('Parameter validation failed: '.$validator->errors()->first());
         } else {
-            return $params;
+            return $validator->validated();
         }
-        
+
     }
 
     /**
