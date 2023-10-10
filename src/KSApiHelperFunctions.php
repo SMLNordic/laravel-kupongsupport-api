@@ -8,10 +8,9 @@ use Illuminate\Support\Facades\Validator;
 
 class KSApiHelperFunctions
 {
-
     /**
-     * @param  Response  $response
      * @return mixed
+     *
      * @throws Exception
      */
     public static function handleApiResponse(Response $response)
@@ -23,10 +22,15 @@ class KSApiHelperFunctions
         }
     }
 
+    /**
+     * @return array
+     *
+     * @throws Exception
+     */
     public static function validateCouponParams(array $params)
     {
 
-        if ( ! $params['template']) {
+        if (! $params['template']) {
             if ($params['type'] == 'mobile') {
                 $params['template'] = config('kupongsupport-api.templates.mobile');
             } elseif ($params['type'] == 'print') {
@@ -34,7 +38,7 @@ class KSApiHelperFunctions
             }
         }
 
-        if ( ! $params['delivery_type']) {
+        if (! $params['delivery_type']) {
 
             if (isset($params['phone_number']) && ! empty($params['phone_number'])) {
                 $params['delivery_type'] == 'sms';
@@ -46,13 +50,13 @@ class KSApiHelperFunctions
         }
 
         $validator = Validator::make($params, [
-            'template'      => 'required|numeric',
-            'type'          => 'required|in:print,mobile',
-            'email'         => 'nullable|required_without:phone_number|email',
-            'phone_number'  => 'nullable|required_without:email|string|min:10|max:12',
+            'template' => 'required|numeric',
+            'type' => 'required|in:print,mobile',
+            'email' => 'nullable|required_without:phone_number|email',
+            'phone_number' => 'nullable|required_without:email|string|min:10|max:12',
             'delivery_type' => 'required|in:sms,email,api',
-            'valid_days'    => 'numeric|min:1',
-            'amount'        => 'numeric'
+            'valid_days' => 'numeric|min:1',
+            'amount' => 'numeric',
         ]);
 
         if ($validator->fails()) {
@@ -64,22 +68,22 @@ class KSApiHelperFunctions
     }
 
     /**
+     * @param  string  $number Phone number to format
+     * @return string Formatted phone number
      *
-     * @param  type  $number
-     * @return type
-     * @throws SocialMediaLabException
+     * @throws Exception
      */
     public function formatNumberTo46($number)
     {
         $number = trim($number);
 
-        if (static::stringStartsWith($number, "0")) {
-            return "46".substr($number, 1);
+        if (static::stringStartsWith($number, '0')) {
+            return '46'.substr($number, 1);
         }
-        if (static::stringStartsWith($number, "46")) {
+        if (static::stringStartsWith($number, '46')) {
             return $number;
         }
-        if (static::stringStartsWith($number, "+46")) {
+        if (static::stringStartsWith($number, '+46')) {
             return substr($number, 1);
         }
 
@@ -87,7 +91,6 @@ class KSApiHelperFunctions
     }
 
     /**
-     *
      * @param  type  $haystack
      * @param  type  $needle
      * @return type

@@ -2,9 +2,9 @@
 
 namespace SMLNordic\KSApi;
 
+use SMLNordic\KSApi\Commands\KSApiCommand;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
-use SMLNordic\KSApi\Commands\KSApiCommand;
 
 class KSApiServiceProvider extends PackageServiceProvider
 {

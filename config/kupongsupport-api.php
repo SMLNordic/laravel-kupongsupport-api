@@ -6,6 +6,6 @@ return [
 
     'templates' => [
         'print' => env('KS_PRINT_TEMPLATE_ID'),
-        'mobile' => env('KS_MOBILE_TEMPLATE_ID')
-    ]
+        'mobile' => env('KS_MOBILE_TEMPLATE_ID'),
+    ],
 ];
