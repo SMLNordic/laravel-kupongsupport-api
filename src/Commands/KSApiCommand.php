@@ -3,6 +3,7 @@
 namespace SMLNordic\KSApi\Commands;
 
 use Illuminate\Console\Command;
+use Illuminate\Support\Facades\File;
 
 class KSApiCommand extends Command
 {
