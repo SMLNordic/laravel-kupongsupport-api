@@ -91,9 +91,8 @@ class KSApiHelperFunctions
     /**
      * @param  string  $haystack
      * @param  string  $needle
-     * @return bool
      */
-    private static function stringStartsWith($haystack, $needle) : bool
+    private static function stringStartsWith($haystack, $needle): bool
     {
         return ! strncmp($haystack, $needle, strlen($needle));
     }
