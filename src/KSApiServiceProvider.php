@@ -18,8 +18,6 @@ class KSApiServiceProvider extends PackageServiceProvider
         $package
             ->name('kupongsupport-api')
             ->hasConfigFile()
-            ->hasViews()
-            ->hasMigration('create_kupongsupport_api_table')
             ->hasCommand(KSApiCommand::class);
     }
 }
