@@ -4,7 +4,7 @@
 [![GitHub Tests Action Status](https://img.shields.io/github/actions/workflow/status/SMLNordic/laravel-kupongsupport-api/run-test.yml?branch=master)](https://github.com/SMLNordic/laravel-kupongsupport-api/actions?query=workflow%3ATests+branch%3Amaster)
 [![GitHub Code Style Action Status](https://img.shields.io/github/actions/workflow/status/SMLNordic/laravel-kupongsupport-api/fix-php-code-style-issues.yml?label=code%20style)](https://github.com/SMLNordic/laravel-kupongsupport-api/actions?query=workflow%3A"Fix+PHP+code+style+issues"+branch%3Amaster)
 [![Total Downloads](https://img.shields.io/packagist/dt/smlnordic/kupongsupport-api.svg?style=flat-square)](https://packagist.org/packages/smlnordic/kupongsupport-api)
-
+![Website](https://img.shields.io/website?url=https%3A%2F%2Fkupongsupport.se%2Fapi&label=KSAPI%20Status)
 ## Installation
 
 You can install the package via composer:
