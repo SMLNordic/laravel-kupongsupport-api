@@ -13,7 +13,7 @@ class KSApiHelperFunctions
      */
     public static function handleApiResponse(Response $response): string
     {
-        if ($response->getStatusCode() == 200 && $response->getBody()) {
+        if ($response->getStatusCode() == 200) {
             return json_decode($response->getBody());
         } else {
             throw new Exception('Could not parse response', 901);
@@ -75,13 +75,13 @@ class KSApiHelperFunctions
     {
         $number = trim($number);
 
-        if (static::stringStartsWith($number, '0')) {
+        if (self::stringStartsWith($number, '0')) {
             return '46'.substr($number, 1);
         }
-        if (static::stringStartsWith($number, '46')) {
+        if (self::stringStartsWith($number, '46')) {
             return $number;
         }
-        if (static::stringStartsWith($number, '+46')) {
+        if (self::stringStartsWith($number, '+46')) {
             return substr($number, 1);
         }
 
@@ -89,11 +89,11 @@ class KSApiHelperFunctions
     }
 
     /**
-     * @param  type  $haystack
-     * @param  type  $needle
-     * @return type
+     * @param  string  $haystack
+     * @param  string  $needle
+     * @return bool
      */
-    private static function stringStartsWith($haystack, $needle)
+    private static function stringStartsWith($haystack, $needle) : bool
     {
         return ! strncmp($haystack, $needle, strlen($needle));
     }
