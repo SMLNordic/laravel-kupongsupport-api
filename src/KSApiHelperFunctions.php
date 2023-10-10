@@ -9,11 +9,9 @@ use Illuminate\Support\Facades\Validator;
 class KSApiHelperFunctions
 {
     /**
-     * @return mixed
-     *
      * @throws Exception
      */
-    public static function handleApiResponse(Response $response)
+    public static function handleApiResponse(Response $response): string
     {
         if ($response->getStatusCode() == 200 && $response->getBody()) {
             return json_decode($response->getBody());

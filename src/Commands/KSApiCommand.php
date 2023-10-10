@@ -7,14 +7,14 @@ use Illuminate\Support\Facades\File;
 
 class KSApiCommand extends Command
 {
-
     public $signature = 'ks-api-init';
 
     public $description = 'Install and publish config';
 
-    private $envs = [
-        'KS_API_TOKEN'    => '',
-        'KS_API_BASE_URL' => '',
+    private array $envs = [
+        'KS_API_TOKEN' => '',
+        'KS_MOBILE_TEMPLATE_ID' => '',
+        'KS_PRINT_TEMPLATE_ID' => '',
     ];
 
     public function handle()
@@ -47,13 +47,13 @@ class KSApiCommand extends Command
             }
 
             // Split each line into key and value
-            $parts = explode("=", $line, 2);
+            $parts = explode('=', $line, 2);
             $key = $parts[0];
 
             // Check if the key exists in the provided data
             if (isset($this->envs[$key])) {
                 // Update the value
-                $line = $key."=".$this->envs[$key];
+                $line = $key.'='.$this->envs[$key];
                 unset($this->envs[$key]);
             }
         }
@@ -61,7 +61,7 @@ class KSApiCommand extends Command
         // Append any new keys that were not present in the original file
         foreach ($this->envs as $key => $value) {
 
-            $lines[] = $key."=".$value;
+            $lines[] = $key.'='.$value;
         }
         // Combine the lines back into a string
         $updatedContents = implode("\n", $lines);
@@ -69,6 +69,4 @@ class KSApiCommand extends Command
         // Write the updated contents back to the .env file
         File::put($envFile, $updatedContents);
     }
-
-
 }

@@ -44,11 +44,29 @@ class KSApi
     }
 
     /**
-     * @return mixed
+     * API Healthcheck
+     *
+     * @return bool
+     */
+    public function isUp()
+    {
+        $response = $this->client->get('/api');
+
+        if ($response && $response->status() == 200) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    /**
+     * Function to create and (alternatively) send a coupon
+     *
+     * @param  array  $options  Array of options for creating a coupon
      *
      * @throws Exception
      */
-    public function createCoupon(array $options)
+    public function createCoupon(array $options): string
     {
         $defaultOptions = [
             'template' => null,
@@ -77,11 +95,13 @@ class KSApi
     }
 
     /**
+     * Get information about a single coupon
+     *
      * @param  int  $id  Coupon ID to fetch
      *
      * @throws Exception
      */
-    public function getCouponStatus(int $id)
+    public function getCouponStatus(int $id): string
     {
         try {
             $response = $this->client->get('/api/coupons/'.$id);
@@ -93,7 +113,14 @@ class KSApi
         }
     }
 
-    public function resendCoupon(int $id)
+    /**
+     * Resend a previously created coupon
+     *
+     * @param  int  $id  Coupon ID
+     *
+     * @throws Exception
+     */
+    public function resendCoupon(int $id): string
     {
         try {
             $response = $this->client->post('/api/coupons/resend', [
@@ -110,7 +137,9 @@ class KSApi
     }
 
     /**
-     * @param  int  $templateId KSID of template to check
+     * Check if a template exists and that we have access to it
+     *
+     * @param  int  $templateId  KSID of template to check
      * @return string|false
      */
     public function checkTemplate(int $templateId)

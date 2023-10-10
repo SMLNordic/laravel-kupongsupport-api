@@ -24,13 +24,6 @@ You can install the package via composer:
 composer require smlnordic/kupongsupport-api
 ```
 
-You can publish and run the migrations with:
-
-```bash
-php artisan vendor:publish --provider="SMLNordic\KSApi\KSApiServiceProvider" --tag="kupongsupport-api-migrations"
-php artisan migrate
-```
-
 You can publish the config file with:
 ```bash
 php artisan vendor:publish --provider="SMLNordic\KSApi\KSApiServiceProvider" --tag="kupongsupport-api-config"
@@ -40,14 +33,21 @@ This is the contents of the published config file:
 
 ```php
 return [
+    'token' => env('KS_API_TOKEN'),
+    'base_url' => env('KS_BASE_URL', 'https://kupongsupport.se'),
+
+    'templates' => [
+        'print' => env('KS_PRINT_TEMPLATE_ID'),
+        'mobile' => env('KS_MOBILE_TEMPLATE_ID'),
+    ],
 ];
 ```
 
 ## Usage
 
 ```php
-$kupongsupport-api = new SMLNordic\KSApi();
-echo $kupongsupport-api->echoPhrase('Hello, SMLNordic!');
+$kupongsupportApi = new SMLNordic\KSApi();
+echo $kupongsupportApi->echoPhrase('Hello, SMLNordic!');
 ```
 
 ## Testing
@@ -60,17 +60,13 @@ composer test
 
 Please see [CHANGELOG](CHANGELOG.md) for more information on what has changed recently.
 
-## Contributing
-
-Please see [CONTRIBUTING](.github/CONTRIBUTING.md) for details.
-
 ## Security Vulnerabilities
 
 Please review [our security policy](../../security/policy) on how to report security vulnerabilities.
 
 ## Credits
 
-- [SocialMediaLab](https://github.com/SocialMediaLab)
+- [SocialMediaLab](https://github.com/SMLNordic)
 - [All Contributors](../../contributors)
 
 ## License
