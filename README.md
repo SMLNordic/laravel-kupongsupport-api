@@ -24,6 +24,12 @@ You can install the package via composer:
 composer require smlnordic/kupongsupport-api
 ```
 
+Init .env variables:
+
+```bash
+php artisan ks-api-init
+```
+
 You can publish the config file with:
 ```bash
 php artisan vendor:publish --provider="SMLNordic\KSApi\KSApiServiceProvider" --tag="kupongsupport-api-config"
@@ -43,12 +49,9 @@ return [
 ];
 ```
 
-## Init .env variables 
-```bash
-php artisan ks-api-init"
-```
-
 ## Usage
+
+Create and send a coupon via SMS:
 
 ```php
 $options = [
@@ -61,6 +64,8 @@ $options = [
 $kupongsupport = new SMLNordic\KSApi();
 $coupon = $kupongsupport->createCoupon($options);
 ```
+
+
 
 ## Testing
 
