@@ -8,7 +8,7 @@ Mostly documentation and workflow updates.
 
 **Full Changelog**: https://github.com/SMLNordic/laravel-kupongsupport-api/compare/2.1.2...2.1.3
 
-## Update workflows and readme - 2023-10-10
+## v2.1.2 - 2023-10-10
 
 **Full Changelog**: https://github.com/SMLNordic/laravel-kupongsupport-api/compare/2.1.1...2.1.2
 
