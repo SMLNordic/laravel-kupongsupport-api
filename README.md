@@ -43,11 +43,23 @@ return [
 ];
 ```
 
+## Init .env variables 
+```bash
+php artisan ks-api-init"
+```
+
 ## Usage
 
 ```php
-$kupongsupportApi = new SMLNordic\KSApi();
-echo $kupongsupportApi->echoPhrase('Hello, SMLNordic!');
+$options = [
+    'template' => XXXX,
+    'type' => 'mobile',
+    'delivery_type' => 'sms',
+    'amount' => 10,
+    'valid_days' => 90,
+];
+$kupongsupport = new SMLNordic\KSApi();
+$coupon = $kupongsupport->createCoupon($options);
 ```
 
 ## Testing
