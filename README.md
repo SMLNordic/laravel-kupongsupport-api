@@ -44,9 +44,9 @@ Create and send a coupon via SMS:
 
 ```php
 $options = [
-    'template' => XXXX,
-    'type' => 'mobile',
-    'delivery_type' => 'sms',
+    'template' => XXXX, // Template ID in Kupongsupport
+    'type' => 'mobile', // "print" or "mobile
+    'delivery_type' => 'sms', // "sms", "email" or "api"
     'amount' => 10,
     'valid_days' => 90,
 ];
