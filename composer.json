@@ -9,13 +9,13 @@
     "license": "MIT",
     "authors": [
         {
-            "name": "SocialMediaLab",
-            "email": "dev@socialmedialab.se",
+            "name": "Niklas Palmqvist",
+            "email": "niklas@codeorama.se",
             "role": "Developer"
         }
     ],
     "require": {
-        "php": "^7.4",
+        "php": "^8.0",
         "guzzlehttp/guzzle": "^7.2",
         "illuminate/contracts": "^8.0",
         "spatie/laravel-package-tools": "^1.4.3"
