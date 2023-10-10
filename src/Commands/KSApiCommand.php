@@ -2,10 +2,6 @@
 
 namespace SMLNordic\KSApi\Commands;
 
-use Dotenv\Dotenv;
-use Dotenv\Repository\Adapter\EnvConstAdapter;
-use Dotenv\Repository\Adapter\PutenvAdapter;
-use Dotenv\Repository\RepositoryBuilder;
 use Illuminate\Console\Command;
 
 class KSApiCommand extends Command
@@ -35,25 +31,43 @@ class KSApiCommand extends Command
     public function updateEnvFile(array $data)
     {
 
-        // Load the .env file into a repository
-        $repository = RepositoryBuilder::createWithNoAdapters()
-            ->addAdapter(EnvConstAdapter::class)
-            ->addWriter(PutenvAdapter::class)
-            ->immutable()
-            ->make();
+        // Read the contents of the .env file
+        $envFile = base_path('.env');
+        $contents = File::get($envFile);
 
-        // Loop through the data and update the values
-        foreach ($data as $key => $value) {
-            $repository->set($key, $value);
+        // Split the contents into an array of lines
+        $lines = explode("\n", $contents);
+
+        // Loop through the lines and update the values
+        foreach ($lines as &$line) {
+            // Skip empty lines
+            if (empty($line)) {
+                continue;
+            }
+
+            // Split each line into key and value
+            $parts = explode("=", $line, 2);
+            $key = $parts[0];
+
+            // Check if the key exists in the provided data
+            if (isset($this->envs[$key])) {
+                // Update the value
+                $line = $key."=".$this->envs[$key];
+                unset($this->envs[$key]);
+            }
         }
 
-        // Save the changes back to the .env file
-        $factory = new DotenvFactory($repository, true);
-        $dotenv = Dotenv::create($repository, $factory);
-        $dotenv->safeLoad();
-        $dotenv->toEnv();
+        // Append any new keys that were not present in the original file
+        foreach ($this->envs as $key => $value) {
 
-        return true;
+            $lines[] = $key."=".$value;
+        }
+        // Combine the lines back into a string
+        $updatedContents = implode("\n", $lines);
 
+        // Write the updated contents back to the .env file
+        File::put($envFile, $updatedContents);
     }
+
+
 }
