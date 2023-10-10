@@ -4,7 +4,6 @@
 [![GitHub Tests Action Status](https://img.shields.io/github/actions/workflow/status/SMLNordic/laravel-kupongsupport-api/run-test.yml?branch=master)](https://github.com/SMLNordic/laravel-kupongsupport-api/actions?query=workflow%3ATests+branch%3Amaster)
 [![GitHub Code Style Action Status](https://img.shields.io/github/actions/workflow/status/SMLNordic/laravel-kupongsupport-api/fix-php-code-style-issues.yml?label=code%20style)](https://github.com/SMLNordic/laravel-kupongsupport-api/actions?query=workflow%3A"Fix+PHP+code+style+issues"+branch%3Amaster)
 [![Total Downloads](https://img.shields.io/packagist/dt/smlnordic/kupongsupport-api.svg?style=flat-square)](https://packagist.org/packages/smlnordic/kupongsupport-api)
-![example branch parameter](https://github.com/github/docs/actions/workflows/main.yml/badge.svg?branch=feature-1)
 
 ## Installation
 
